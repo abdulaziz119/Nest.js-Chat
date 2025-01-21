@@ -1,39 +1,39 @@
 # NestJS Chat Application
 
-Bu loyiha NestJS frameworkida yaratilgan real-time chat ilovasidir.
+A real-time chat application built with NestJS framework.
 
-## Loyiha tuzilishi
+## Project Structure
 
 ```
 src/
-├── constants/        # Constant qiymatlar
-├── database/        # Database konfiguratsiyasi
-├── entity/         # Database entitylari
-├── modules/        # Asosiy modullar (users, chats)
-├── utils/          # Yordamchi funksiyalar
-├── app.module.ts   # Asosiy modul
-└── main.ts         # Dastur entry point
+├── constants/        # Constant values
+├── database/        # Database configuration
+├── entity/         # Database entities
+├── modules/        # Core modules (users, chats)
+├── utils/          # Helper functions
+├── app.module.ts   # Main module
+└── main.ts         # Application entry point
 ```
 
-## Asosiy funksionallik
+## Key Features
 
-- Foydalanuvchilar ro'yxatdan o'tishi va tizimga kirishi
-- Real-time xabarlar almashish
-- Guruh chatlari
-- Xabarlarni tahrirlash va o'chirish
-- Foydalanuvchi profili
+- User registration and authentication
+- Real-time messaging
+- Group chats
+- Message editing and deletion
+- User profiles
 
-## O'rnatish
+## Installation
 
 ```bash
-# Kerakli paketlarni o'rnatish
+# Install dependencies
 $ yarn install
 
-# .env faylini sozlash
+# Set up environment variables
 $ cp .env.example .env
 ```
 
-## Ishga tushirish
+## Running the app
 
 ```bash
 # Development mode
@@ -43,41 +43,128 @@ $ yarn run start:dev
 $ yarn run start:prod
 ```
 
-## Test qilish
+## Testing
 
 ```bash
-# unit testlar
+# Unit tests
 $ yarn run test
 
-# e2e testlar
+# E2E tests
 $ yarn run test:e2e
 ```
 
-## API Endpoints
+## API Documentation
 
-### Foydalanuvchilar
+### Users Module (/api/users)
 
-- POST /api/users/register - Ro'yxatdan o'tish
-- POST /api/users/login - Tizimga kirish
-- GET /api/users/profile - Profil ma'lumotlarini olish
-- PUT /api/users/profile - Profil ma'lumotlarini yangilash
+#### User Management
+- `POST /users/add` - Create new user
+  - Body: UsersCreateDto
+  - Response: UserEntity
+  - Status: 201
 
-### Chatlar
+- `GET /users/findAll` - Get all users with pagination
+  - Query: PaginateParamsDto
+  - Response: UserEntity[]
+  - Status: 200
 
-- GET /api/chats - Chatlar ro'yxatini olish
-- POST /api/chats - Yangi chat yaratish
-- PUT /api/chats/:id - Chat ma'lumotlarini yangilash
-- DELETE /api/chats/:id - Chatni o'chirish
-- POST /api/chats/:id/messages - Xabar yuborish
+- `GET /users/findOne/:id` - Get user by ID
+  - Param: id (number)
+  - Response: UserEntity
+  - Status: 200
 
-## Texnologiyalar
+- `PUT /users/update` - Update user
+  - Body: UsersUpdateDto
+  - Response: UserEntity
+  - Status: 202
+
+- `DELETE /users/delete/:id` - Delete user
+  - Param: id (number)
+  - Response: DeleteResult
+  - Status: 200
+
+### Chats Module (/api/chats)
+
+#### Chat Management
+- `POST /chats/add` - Create new chat
+  - Body: ChatsCreateDto
+  - Response: ChatEntity
+  - Status: 201
+
+- `GET /chats/findAll` - Get all chats with pagination
+  - Query: PaginateParamsDto
+  - Response: ChatEntity[]
+  - Status: 200
+
+- `GET /chats/findOne/:id` - Get chat by ID
+  - Param: id (number)
+  - Response: ChatEntity
+  - Status: 200
+
+- `PUT /chats/update` - Update chat
+  - Body: ChatsUpdateDto
+  - Response: ChatEntity
+  - Status: 202
+
+- `DELETE /chats/delete/:id` - Delete chat
+  - Param: id (number)
+  - Response: DeleteResult
+  - Status: 200
+
+### Messages Module (/api/message)
+
+#### Message Management
+- `POST /message/add` - Create new message
+  - Body: MessageCreateDto
+  - Response: MessageEntity
+  - Status: 201
+
+- `GET /message/findAll` - Get all messages with pagination
+  - Query: PaginateParamsDto
+  - Response: MessageEntity[]
+  - Status: 200
+
+- `GET /message/findOne/:id` - Get message by ID
+  - Param: id (number)
+  - Response: MessageEntity
+  - Status: 200
+
+- `PUT /message/update` - Update message
+  - Body: MessageUpdateDto
+  - Response: MessageEntity
+  - Status: 202
+
+- `DELETE /message/delete/:id` - Delete message
+  - Param: id (number)
+  - Response: DeleteResult
+  - Status: 200
+
+### Chat Users Module (/api/chat-users)
+
+#### Chat Users Management
+- `GET /chat-users/findAll` - Get all chat users with pagination
+  - Query: PaginateParamsDto
+  - Response: ChatUsersEntity[]
+  - Status: 200
+
+- `GET /chat-users/findOne/:id` - Get chat user by ID
+  - Param: id (number)
+  - Response: ChatUsersEntity
+  - Status: 200
+
+- `PUT /chat-users/update` - Update chat user
+  - Body: ChatUsersUpdateDto
+  - Response: ChatUsersEntity
+  - Status: 202
+
+## Technologies
 
 - NestJS - Backend framework
 - TypeORM - Database ORM
-- PostgreSQL - Ma'lumotlar bazasi
-- WebSocket - Real-time aloqa
-- JWT - Autentifikatsiya
+- PostgreSQL - Database
+- WebSocket - Real-time communication
+- JWT - Authentication
 
-## Litsenziya
+## License
 
 MIT
