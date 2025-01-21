@@ -1,4 +1,7 @@
-export const CHAT_SOURCE = 'CHAT_SOURCE';
+export const CHAT_SOURCE = "CHAT_SOURCE";
 export const MODELS = {
-  USER: 'USERS_MODEL',
+  USER: "USERS_MODEL",
+  CHAT: "CHAT_MODEL",
+  CHAT_USER: "CHAT_USER_MODEL",
+  MESSAGE: "MESSAGE_MODEL",
 };
